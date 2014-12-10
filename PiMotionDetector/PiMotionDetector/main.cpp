@@ -9,6 +9,9 @@
 #include <iostream>
 #include <utility>
 #include <opencv2/opencv.hpp>
+
+#include <opencv2/highgui/highgui_c.h>
+#include <opencv2/imgcodecs/imgcodecs_c.h>
 #include "RaspiCamCV.h"
 
 using namespace cv;
@@ -30,9 +33,8 @@ Mat diffImg(Mat t0, Mat t1, Mat t2)
 pair<Mat,Mat> captureImage(RaspiCamCvCapture* capture)
 {
     Mat processed;
-    IplImage* img=raspiCamCvQueryFrame(capture);
-    Mat original= cvarrToMat(img); 
-    //capture >> original;
+    Ptr<IplImage> img(raspiCamCvQueryFrame(capture));
+    Mat original = cvarrToMat(img); 
     cvtColor(original, processed, COLOR_BGR2GRAY);
     return pair<Mat, Mat>(original, processed);
 }

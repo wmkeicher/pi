@@ -16,14 +16,15 @@ find_package( OpenCV REQUIRED )
 
 #include_directories("${PROJECT_BINARY_DIR}")
 
+set(RASPICAM_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../../robidouille/raspicam_cv)
 
-include_directories("/home/pi/robidouille-master/raspicam_cv")
-
+include_directories(${RASPICAM_DIR})
+link_directories(${RASPICAM_DIR})
  
 # add the executable
 add_executable(piMotionDetector PiMotionDetector/main.cpp)
 
-target_link_libraries(piMotionDetector "/home/pi/robidouille-master/raspicam_cv/libraspicamcv.a")
+target_link_libraries(piMotionDetector libraspicamcv.a)
 
 #userland
 target_link_libraries(piMotionDetector -L/home/pi/userland/build/lib mmal_core mmal mmal_util vcos bcm_host)

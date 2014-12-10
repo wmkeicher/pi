@@ -33,7 +33,7 @@ Mat diffImg(Mat t0, Mat t1, Mat t2)
 pair<Mat,Mat> captureImage(RaspiCamCvCapture* capture)
 {
     Mat processed;
-    Ptr<IplImage> img(raspiCamCvQueryFrame(capture));
+    IplImage* img = raspiCamCvQueryFrame(capture);
     Mat original = cvarrToMat(img); 
     cvtColor(original, processed, COLOR_BGR2GRAY);
     return pair<Mat, Mat>(original, processed);
